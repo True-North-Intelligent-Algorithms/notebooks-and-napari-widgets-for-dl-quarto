@@ -1,0 +1,102 @@
+---
+title: "Notebooks and Widgets for Deep Learning"
+format:
+  revealjs:
+          theme: default
+          slide-number: true
+          footer: Northeast Bioimage Analysis Meeting
+          transition: "slide"
+          highlight-style: arrow
+          chalkboard: 
+              buttons: false
+          controls-layout: bottom-right
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+## Large objects with protrusions
+
+* Image set courtesy of [Arkajyoti Sarkar](https://www.linkedin.com/in/arkaj/?originalSubdomain=in) 
+* See [this Image.sc question](https://forum.image.sc/t/challenging-segmentation-with-cellpose-need-help/103618)  
+* Combination of large cells and long fine irregular protrusions
+
+##
+```{python}
+from skimage.io import imread
+from tnia.plotting.plt_helper import imshow_multi2d, imshow2d
+from tnia.deeplearning.dl_helper import quantile_normalization
+from tnia.plotting.plt_helper import random_label_cmap
+from cellpose import models, io
+
+img = imread("./data/protrusions/img153.tif") 
+img = quantile_normalization(img, channels=True)
+ground_truth = imread(r".\data\protrusions\annotations\class_0\img153.tif")
+
+model_cyto3 = models.CellposeModel(gpu=True, model_type="cyto3")
+masks_cyto3 = model_cyto3.eval(img, diameter=100, channels=[2,3])
+
+fig = imshow_multi2d([img, ground_truth, masks_cyto3[0]], ['image', 'ground truth', 'cyto3 diameter=100'], 1, 3, colormaps=['gray', random_label_cmap(), random_label_cmap()])
+```
+## Challenges and considerations
+
+* Need to retrain to detect protrusions better
+* Cellpose rescales during training which could result in some loss of fine features. 
+* Receptive field? During training and prediction do we need the entire cell and protrusions in receptive field of neural network?
+    * Receptive field may be more important in stardist, Cellpose 'seems' to predict good flows with tiling.  
+
+## Self-prediction
+
+* Train on one image, predict on same image.
+* Not going to get good generalization this way!
+    * but... a useful experiment to determine if model can code structure of interest. 
+* Try to tune parameters to get 'perfect' self-prediction then move on to training a real model that generalizes. 
+
+##
+
+```{python}
+import os
+parent_path = r'./data/protrusions'
+
+model_finetuned_defaults = models.CellposeModel(gpu=True, pretrained_model=os.path.join(parent_path, 'models', 'defaults'))   
+
+model_finetuned_no_rescale = models.CellposeModel(gpu=True, pretrained_model=os.path.join(parent_path, 'models', 'no_rescale'))
+
+model_finetuned_no_rescale_bsize_512 = models.CellposeModel(gpu=True, pretrained_model=os.path.join(parent_path, 'models', 'no_rescale_bsize_512'))
+
+masks_defaults = model_finetuned_defaults.eval(img, diameter=100, niter=2000, channels=[2,3], normalize=False)
+
+fig = imshow_multi2d([ground_truth, masks_defaults[0], masks_defaults[1][2], masks_defaults[1][0]], ['Ground Truth', 'Prediction finetuned default', 'probs', 'flows'], 2, 2, width=8, height=8, colormaps=[random_label_cmap(), random_label_cmap(), 'viridis', 'viridis'])
+```
+
+## Training Strategy
+
+* Turn rescalig off to avoid losing resolution and this features.
+* Use larger bsize (crop size) to get more information in each training patch.
+    * (turned out this may not be that important)
+
+## Training code
+
+```
+train.train_seg( model_finetuned_no_rescale_bsize_512.net, X_list, Y_list,   
+                channels=[2,3], 
+                save_path=parent_path, 
+                n_epochs=500,
+                min_train_masks=0,
+                rescale = False,  
+                model_name='no_rescale_bsize_512',
+                normalize=False,
+                bsize=512)
+```
+
+## Retrained no rescaling
+
+```{python}
+mask_no_rescale = model_finetuned_no_rescale_bsize_512.eval(img, diameter=30, niter=2000, channels=[2,3], normalize=False) 
+fig = imshow_multi2d([ground_truth, mask_no_rescale[0], mask_no_rescale[1][2], mask_no_rescale[1][0]], ['Ground Truth', 'Prediction no training rescale', 'probs', 'flows'], 2, 2, width=8, height=8, colormaps=[random_label_cmap(), random_label_cmap(), 'viridis', 'viridis'])
+```
+
+## Retrained defaults
+```{python}
+fig = imshow_multi2d([ground_truth, masks_defaults[0], masks_defaults[1][2], masks_defaults[1][0]], ['Ground Truth', 'Prediction finetuned default', 'probs', 'flows'], 2, 2, width=8, height=8, colormaps=[random_label_cmap(), random_label_cmap(), 'viridis', 'viridis'])
+```

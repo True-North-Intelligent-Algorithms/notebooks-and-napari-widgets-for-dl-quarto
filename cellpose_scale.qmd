@@ -1,0 +1,137 @@
+---
+title: "Notebooks and Widgets for Deep Learning"
+format:
+  revealjs:
+          theme: default
+          slide-number: true
+          footer: Northeast Bioimage Analysis Meeting
+          transition: "slide"
+          highlight-style: arrow
+          chalkboard: 
+              buttons: false
+          controls-layout: bottom-right
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+
+## Cellpose trained to learn scale
+
+* Use same Cellpose model to detect spheres of varying sizes in the same image
+* Common to use diameter parameter to rescale image
+    * May not work if different scales in the same image
+
+## Phantom Image
+```{python}
+import raster_geometry as rg
+import numpy as np
+from tnia.simulation.phantoms import add_small_to_large_2d
+import matplotlib.pyplot as plt
+from tnia.plotting.plt_helper import imshow_multi2d, imshow2d
+import math
+
+width, height = 624, 224
+
+image = np.zeros([height, width], dtype=np.float32)
+truth = np.zeros([height, width], dtype=np.float32)
+
+rs = [3, 5, 15, 30, 60, 70]
+
+x_ = 44
+
+# for train will be a list of the 224 by 224 circle images that will be used for training
+for_train = []
+
+i = 0
+for r in rs:
+    x, y = x_, 112
+    size = [math.ceil(r*2), math.ceil(r*2)]
+    size = [224, 224]
+    temp=rg.circle(size, r)
+    for_train.append(temp)
+    add_small_to_large_2d(image, temp, x, y, mode='replace_non_zero')
+    add_small_to_large_2d(truth, i*temp, x, y, mode='replace_non_zero')
+    x_ = x_ + 50+2*r
+    i += 1
+
+
+fig = imshow2d(image, width=8, height=3.5)
+fig.suptitle('Image')
+fig = imshow2d(truth, width=8, height=3.5)
+stop=fig.suptitle('Truth')
+```
+
+## Process with Cyto2 and different diameters
+
+## diameter=6
+```{python}
+from cellpose import models, io
+model_cyto2 = models.CellposeModel(gpu=True, model_type="cyto2")
+
+flow_threshold = 0
+cellprob_threshold = -0.8
+
+labels_d6 = model_cyto2.eval(image, channels=[0, 0],diameter=6,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]
+labels_default = model_cyto2.eval(image, channels=[0, 0], flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]
+labels_none = model_cyto2.eval(image, channels=[0, 0], diameter = None, flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]
+labels_d70 = model_cyto2.eval(image, channels=[0, 0],diameter=70,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]
+labels_d140 = model_cyto2.eval(image, channels=[0, 0],diameter=140,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]
+#fig = imshow_multi2d([image, labels_d6, labels_default, labels_none, labels_d70, labels_d140], ['truth', 'cyto2 d=6', 'cyto2 default', 'cyto2 None', 'cyto2 d=70','cyto2 d=140'], 6 ,1, width = 12, height = 22)
+
+height = 2.6 
+
+fig = imshow2d(truth, width=8, height=height)
+stop=fig.suptitle('Truth')
+fig = imshow2d(labels_d6, width=8, height=height)
+stop=fig.suptitle('diameter=6')
+
+```
+
+
+## diameter=30
+```{python}
+fig = imshow2d(truth, width=8, height=height)
+stop=fig.suptitle('Truth')
+fig = imshow2d(labels_default, width=8, height=height)
+stop=fig.suptitle('diameter=30')
+
+```
+## diameter=70
+```{python}
+fig = imshow2d(truth, width=8, height=height)
+stop=fig.suptitle('Truth')
+fig = imshow2d(labels_d70, width=8, height=height)
+stop=fig.suptitle('diameter=70')
+
+```
+## diameter = 140
+```{python}
+fig = imshow2d(truth, width=8, height=height)
+stop=fig.suptitle('Truth')
+fig = imshow2d(labels_d140, width=8, height=height)
+stop=fig.suptitle('diameter=140')
+
+```
+## Train custom model
+```
+train.train_seg(model_custom.net, X, Y, 
+    channels=[0,0], 
+    save_path=model_path, 
+    n_epochs=180,
+    min_train_masks=1,
+    normalize = False,
+    rescale = False,  
+    model_name=model_name)
+```
+## Custom model (diameter=30)
+```{python}
+model_path = r'./models/custom' 
+
+model_custom = models.CellposeModel(gpu=True, model_type=None, pretrained_model= model_path)
+labels_custom = model_custom.eval(image, channels=[0, 0],diameter=30,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]
+fig = imshow2d(truth, width=8, height=height)
+stop=fig.suptitle('Truth')
+fig = imshow2d(labels_custom, width=8, height=height)
+stop=fig.suptitle('Custom model diameter=30')
+```
