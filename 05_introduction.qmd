@@ -1,5 +1,4 @@
 
-## Instance Segmentation
 
 ## Outline
 

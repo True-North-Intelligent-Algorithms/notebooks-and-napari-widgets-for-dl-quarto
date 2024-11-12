@@ -1,9 +1,8 @@
 # Ladybugs at different scales
 
-# {background-image="./data/ladybugs_series/8220954_10897041.jpg"}
-# {background-image="./data/ladybugs_series/5622668_6951835.jpg"}
-# {background-image="./data/ladybugs_series/5784124_7185843.jpg"}
-# {background-image="./data/ladybugs_series/6337689_7986324.jpg"}
+# {background-image="./ladybug-scale-1.png"}
+# {background-image="./ladybug-scale-2.png"}
+# {background-image="./ladybug-scale-3.png"}
 
 # How to handle this ? 
 
@@ -12,12 +11,6 @@
     * Stardist ```scale```
 * What if hundreds of images ? 
     * Can we train for different scales ? 
-
-# Label different scales
-
-# {background-image="./ladybug-scale-1.png"}
-# {background-image="./ladybug-scale-2.png"}
-# {background-image="./ladybug-scale-3.png"}
 
 # Self-Prediction 
 

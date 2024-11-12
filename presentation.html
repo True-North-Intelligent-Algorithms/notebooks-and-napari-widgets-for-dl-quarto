@@ -531,7 +531,7 @@
 </section>
 <section id="test-image" class="slide level2">
 <h2>Test image</h2>
-<div id="9e247924" class="cell" data-execution_count="1">
+<div id="df22c094" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -543,7 +543,7 @@
 </section>
 <section id="start-napari-and-add-layers" class="slide level2">
 <h2>Start Napari and add layers</h2>
-<div id="8a8aa6c8" class="cell" data-execution_count="2">
+<div id="b6b7c638" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>viewer <span class="op">=</span> napari.Viewer()</span>
 <span id="cb1-2"><a href=""></a></span>
 <span id="cb1-3"><a href=""></a>labels <span class="op">=</span> np.zeros([img.shape[<span class="dv">0</span>], img.shape[<span class="dv">1</span>]], dtype<span class="op">=</span>np.uint16)</span>
@@ -558,7 +558,7 @@
 </section>
 <section id="add-a-cellpose-layer" class="slide level2">
 <h2>Add a cellpose layer</h2>
-<div id="5926ac3c" class="cell" data-execution_count="3">
+<div id="ffcb8f01" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> cellpose <span class="im">import</span> models, io</span>
 <span id="cb2-2"><a href=""></a>model_cyto3 <span class="op">=</span> models.CellposeModel(gpu<span class="op">=</span><span class="va">True</span>, model_type<span class="op">=</span><span class="st">"cyto3"</span>)</span>
 <span id="cb2-3"><a href=""></a>results <span class="op">=</span> np.zeros([img.shape[<span class="dv">0</span>], img.shape[<span class="dv">1</span>]], dtype<span class="op">=</span>np.uint16)</span>
@@ -566,7 +566,7 @@
 <span id="cb2-5"><a href=""></a>results <span class="op">=</span> model_cyto3.<span class="bu">eval</span>(img, diameter<span class="op">=</span><span class="dv">140</span>)</span>
 <span id="cb2-6"><a href=""></a>viewer.layers[<span class="st">'cyto3 masks'</span>].data <span class="op">=</span> results[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="abd6e77b" class="cell" data-execution_count="4">
+<div id="33f2c6f3" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -578,7 +578,7 @@
 </section>
 <section id="get-the-roi-and-labels-we-drew-in-napari" class="slide level2">
 <h2>Get the ROI and labels we drew in Napari</h2>
-<div id="4e10381d" class="cell" data-execution_count="5">
+<div id="0cc25dfa" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -627,7 +627,7 @@
 </section>
 <section id="explore-and-label-data-1" class="slide level2">
 <h2>Explore and label data</h2>
-<div id="0733a1d2" class="cell" data-execution_count="7">
+<div id="638c0548" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -867,7 +867,7 @@
 </section>
 <section id="phantom-image" class="slide level2">
 <h2>Phantom Image</h2>
-<div id="200d0f11" class="cell" data-execution_count="9">
+<div id="8eecc4aa" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -889,7 +889,7 @@
 </section>
 <section id="diameter6" class="slide level2">
 <h2>diameter=6</h2>
-<div id="86576505" class="cell" data-execution_count="11">
+<div id="623f3a95" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -908,7 +908,7 @@
 </section>
 <section id="diameter30" class="slide level2">
 <h2>diameter=30</h2>
-<div id="23847695" class="cell" data-execution_count="12">
+<div id="5de01ada" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -927,7 +927,7 @@
 </section>
 <section id="diameter70" class="slide level2">
 <h2>diameter=70</h2>
-<div id="24b41bb3" class="cell" data-execution_count="13">
+<div id="4fec872e" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -946,7 +946,7 @@
 </section>
 <section id="diameter-140" class="slide level2">
 <h2>diameter = 140</h2>
-<div id="48f65c60" class="cell" data-execution_count="14">
+<div id="cb6831a2" class="cell" data-execution_count="14">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -976,7 +976,7 @@
 </section>
 <section id="custom-model-diameter30" class="slide level2">
 <h2>Custom model (diameter=30)</h2>
-<div id="fad0e167" class="cell" data-execution_count="16">
+<div id="4cf73710" class="cell" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1002,7 +1002,7 @@
 </section>
 <section id="create-a-2d-object" class="slide level2">
 <h2>Create a 2D Object</h2>
-<div id="f7be86a8" class="cell" data-execution_count="17">
+<div id="2bae40fe" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1058,7 +1058,7 @@
 </section>
 <section id="cyto3-results" class="slide level2">
 <h2>Cyto3 Results</h2>
-<div id="9c69e801" class="cell" data-execution_count="19">
+<div id="d80b777a" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1114,7 +1114,7 @@
 </section>
 <section id="retrained-defaults" class="slide level2">
 <h2>Retrained defaults</h2>
-<div id="5783e300" class="cell" data-execution_count="21">
+<div id="74402051" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1126,7 +1126,7 @@
 </section>
 <section id="retrained-no-rescaling" class="slide level2">
 <h2>Retrained no rescaling</h2>
-<div id="20748d0a" class="cell" data-execution_count="22">
+<div id="ce804413" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1170,22 +1170,17 @@
 
 </section>
 
-<section id="section-18" class="title-slide slide level1 center" data-background-image="./data/ladybugs_series/8220954_10897041.jpg">
+<section id="section-18" class="title-slide slide level1 center" data-background-image="./ladybug-scale-1.png">
 <h1></h1>
 
 </section>
 
-<section id="section-19" class="title-slide slide level1 center" data-background-image="./data/ladybugs_series/5622668_6951835.jpg">
+<section id="section-19" class="title-slide slide level1 center" data-background-image="./ladybug-scale-2.png">
 <h1></h1>
 
 </section>
 
-<section id="section-20" class="title-slide slide level1 center" data-background-image="./data/ladybugs_series/5784124_7185843.jpg">
-<h1></h1>
-
-</section>
-
-<section id="section-21" class="title-slide slide level1 center" data-background-image="./data/ladybugs_series/6337689_7986324.jpg">
+<section id="section-20" class="title-slide slide level1 center" data-background-image="./ladybug-scale-3.png">
 <h1></h1>
 
 </section>
@@ -1205,26 +1200,6 @@
 </ul>
 </section>
 
-<section id="label-different-scales" class="title-slide slide level1 center">
-<h1>Label different scales</h1>
-
-</section>
-
-<section id="section-22" class="title-slide slide level1 center" data-background-image="./ladybug-scale-1.png">
-<h1></h1>
-
-</section>
-
-<section id="section-23" class="title-slide slide level1 center" data-background-image="./ladybug-scale-2.png">
-<h1></h1>
-
-</section>
-
-<section id="section-24" class="title-slide slide level1 center" data-background-image="./ladybug-scale-3.png">
-<h1></h1>
-
-</section>
-
 <section id="self-prediction-1" class="title-slide slide level1 center">
 <h1>Self-Prediction</h1>
 <ul>
@@ -1232,17 +1207,17 @@
 </ul>
 </section>
 
-<section id="section-25" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-1.png">
+<section id="section-21" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-1.png">
 <h1></h1>
 
 </section>
 
-<section id="section-26" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-2.png">
+<section id="section-22" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-2.png">
 <h1></h1>
 
 </section>
 
-<section id="section-27" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-3.png">
+<section id="section-23" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-3.png">
 <h1></h1>
 
 </section>
@@ -1254,27 +1229,27 @@
 </ul>
 </section>
 
-<section id="section-28" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-1.png">
+<section id="section-24" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-1.png">
 <h1></h1>
 
 </section>
 
-<section id="section-29" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-2.png">
+<section id="section-25" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-2.png">
 <h1></h1>
 
 </section>
 
-<section id="section-30" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-3.png">
+<section id="section-26" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-3.png">
 <h1></h1>
 
 </section>
 
-<section id="section-31" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-4.png">
+<section id="section-27" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-4.png">
 <h1></h1>
 
 </section>
 
-<section id="section-32" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-5.png">
+<section id="section-28" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-5.png">
 <h1></h1>
 
 </section>
@@ -1381,7 +1356,7 @@
 </section>
 <section id="original-and-segmented" class="slide level2">
 <h2>Original and Segmented</h2>
-<div id="1b928e4e" class="cell" data-execution_count="26">
+<div id="0f349573" class="cell" data-execution_count="26">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -1393,7 +1368,7 @@
 </section>
 <section id="filter" class="slide level2">
 <h2>Filter</h2>
-<div id="923d26ae" class="cell" data-execution_count="27">
+<div id="582cd02c" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
