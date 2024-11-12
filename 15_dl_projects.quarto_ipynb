@@ -1,0 +1,113 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## File Organization\n",
+        "\n",
+        "Deep learning is\n",
+        "\n",
+        "* 60% file organization\n",
+        "* 40% drawing\n",
+        "\n",
+        "## Types of files\n",
+        "\n",
+        "* **annotations**:  the annotated images  \n",
+        "* **labels**: The annotations used for training   \n",
+        "* **patches**: Patches are regions extracted from labels and augmented.  You can have potentially thousands of patches.  \n",
+        "    * Often computed 'lazily' during training\n",
+        "\n",
+        "## Types of files\n",
+        "\n",
+        "* **models**:  Files contianing model weights\n",
+        "* **predictions**: Predictions generated from models  \n",
+        "* **yolo-labels/patches/predictions**: These are bounding boxes useful for some DL approaches \n",
+        "\n",
+        "## File Organization\n",
+        "\n",
+        "![](./file-organization.jpg)\n",
+        "\n",
+        "## Explore and label data \n"
+      ],
+      "id": "67bf6864"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "#| include: false \n",
+        "import os\n",
+        "import numpy as np\n",
+        "import napari\n",
+        "from napari_easy_augment_batch_dl import easy_augment_batch_dl\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "viewer = napari.Viewer()\n",
+        "\n",
+        "batch_dl = easy_augment_batch_dl.NapariEasyAugmentBatchDL(viewer, label_only = False)\n",
+        "\n",
+        "viewer.window.add_dock_widget(\n",
+        "    batch_dl\n",
+        ")\n",
+        "\n",
+        "data_path = r'./data'\n",
+        "parent_path = os.path.join(data_path, 'ladybugs1')\n",
+        "model_path = os.path.join(parent_path, 'models')\n",
+        "\n",
+        "batch_dl.load_image_directory(parent_path)\n",
+        "\n",
+        "model_name = 'cellpose_for_ladybugs'\n",
+        "\n",
+        "model_type = \"CellPose Instance Model\"\n",
+        "batch_dl.network_architecture_drop_down.setCurrentText(model_type)\n",
+        "batch_dl.deep_learning_project.set_pretrained_model(os.path.join(model_path, model_name), model_type)"
+      ],
+      "id": "5f403f01",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Explore and label data\n"
+      ],
+      "id": "914be92e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "screenshot = viewer.screenshot(r'./napari_screenshot.png', canvas_only=False)\n",
+        "plt.imshow(screenshot)"
+      ],
+      "id": "6573eda9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "#| include: false \n",
+        "viewer.close()"
+      ],
+      "id": "795fbe91",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\bnort\\miniconda3\\envs\\pytorch_and_SAM3\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

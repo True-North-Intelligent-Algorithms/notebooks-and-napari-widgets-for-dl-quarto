@@ -38,6 +38,10 @@
 
 # {background-image="./patches.jpg" background-size="contain"}
 
+# Train
+
+* train on augmented patches
+
 # Prediction
  * after training go back and predict
     * correct mistakes

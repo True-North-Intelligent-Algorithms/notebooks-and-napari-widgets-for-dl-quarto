@@ -2,7 +2,9 @@
 
 ## Outline
 
+* Introduction
 * Napari basics
+* Organizing Deep Learning Projects
 * Train/Validate on one image
     * with Napari ROIs
 
@@ -20,9 +22,23 @@
 
 * Segment anything and everything (SAM)
     * visualizing overlapping SAM labels
-    * Segment everything and filter
+* Segment everything and filter
 
 ## Instance segmentation
+
+## Why notebooks ? 
+
+* Can be useful for developers and non-developers
+* Visual
+* Compromise between GUI and Code
+
+## Why Widgets ?
+
+* Complimentary to notebooks
+* Need a GUI for some DL steps 
+    * Can't draw labels with code
+* Marketing term ?
+    * Not quite ready for prime time
 
 ## Links to projects used in this presentation 
 

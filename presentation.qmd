@@ -6,8 +6,6 @@
 
 {{< include 10_napari_basics.qmd >}}
 
-{{< include 15_dl_projects.qmd >}}
-
 {{< include 17_label_predict.qmd >}}
 
 {{< include 22_sparse_predict.qmd >}}

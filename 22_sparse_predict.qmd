@@ -31,18 +31,8 @@
 
 * Why not ?
     * Fewer 'edges' between tightly clustered objects. 
-    
-# {background-image="./easy-augment-sparse.png" background-size="contain"}
 
-# Predictions
-
-* following predictions are from model trained with sparse labels
-
-# {background-image="./easy-augment-sparse-1-prediction.png" background-size="contain"}
-# {background-image="./easy-augment-sparse-2-prediction.png" background-size="contain"}
-# {background-image="./easy-augment-sparse-0-prediction.png" background-size="contain"}
-
-# Again the labels...
+# Sparse Labels 
 
 # {background-image="./easy-augment-sparse.png" background-size="contain"}
 # {background-image="./easy-augment-sparse-2.png" background-size="contain"}

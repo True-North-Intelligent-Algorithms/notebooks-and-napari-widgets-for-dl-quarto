@@ -106,6 +106,7 @@ fig = imshow_multi2d([ground_truth, mask_no_rescale[0], mask_no_rescale[1][2], m
 * 10 labeled
 * no rescaling during training
 * bsize = 512
+* niter = 5000 during prediction
 
 ## Model training on sequence
 ![](./napari-protrusions-1.png)

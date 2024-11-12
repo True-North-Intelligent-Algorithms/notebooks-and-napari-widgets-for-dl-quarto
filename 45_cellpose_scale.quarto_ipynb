@@ -1,0 +1,250 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Notebooks and Napari Widgets for Deep Learning\"\n",
+        "format:\n",
+        "  revealjs:\n",
+        "          theme: default\n",
+        "          slide-number: true\n",
+        "          footer: Northeast Bioimage Analysis Meeting\n",
+        "          transition: \"slide\"\n",
+        "          highlight-style: arrow\n",
+        "          chalkboard: \n",
+        "              buttons: false\n",
+        "          controls-layout: bottom-right\n",
+        "  html:\n",
+        "    code-fold: true\n",
+        "jupyter: python3\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Cellpose trained to learn scale\n",
+        "\n",
+        "* Use same Cellpose model to detect spheres of varying sizes in the same image\n",
+        "* Common to use diameter parameter to rescale image\n",
+        "    * May not work if different scales in the same image\n",
+        "\n",
+        "## Phantom Image"
+      ],
+      "id": "551c1bf3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import raster_geometry as rg\n",
+        "import numpy as np\n",
+        "from tnia.simulation.phantoms import add_small_to_large_2d\n",
+        "import matplotlib.pyplot as plt\n",
+        "from tnia.plotting.plt_helper import imshow_multi2d, imshow2d\n",
+        "import math\n",
+        "\n",
+        "width, height = 624, 224\n",
+        "\n",
+        "image = np.zeros([height, width], dtype=np.float32)\n",
+        "truth = np.zeros([height, width], dtype=np.float32)\n",
+        "\n",
+        "rs = [3, 5, 15, 30, 60, 70]\n",
+        "\n",
+        "x_ = 44\n",
+        "\n",
+        "# for train will be a list of the 224 by 224 circle images that will be used for training\n",
+        "for_train = []\n",
+        "\n",
+        "i = 0\n",
+        "for r in rs:\n",
+        "    x, y = x_, 112\n",
+        "    size = [math.ceil(r*2), math.ceil(r*2)]\n",
+        "    size = [224, 224]\n",
+        "    temp=rg.circle(size, r)\n",
+        "    for_train.append(temp)\n",
+        "    add_small_to_large_2d(image, temp, x, y, mode='replace_non_zero')\n",
+        "    add_small_to_large_2d(truth, i*temp, x, y, mode='replace_non_zero')\n",
+        "    x_ = x_ + 50+2*r\n",
+        "    i += 1\n",
+        "\n",
+        "\n",
+        "fig = imshow2d(image, width=8, height=3.5)\n",
+        "fig.suptitle('Image')\n",
+        "fig = imshow2d(truth, width=8, height=3.5)\n",
+        "stop=fig.suptitle('Truth')"
+      ],
+      "id": "5bbe49a2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Process with Cyto2 and different diameters\n",
+        "\n",
+        "## diameter=6"
+      ],
+      "id": "fd38be06"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "#| include: false \n",
+        "from cellpose import models, io\n",
+        "model_cyto2 = models.CellposeModel(gpu=True, model_type=\"cyto2\")\n",
+        "\n",
+        "flow_threshold = 0\n",
+        "cellprob_threshold = -0.8\n",
+        "\n",
+        "labels_d6 = model_cyto2.eval(image, channels=[0, 0],diameter=6,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]\n",
+        "labels_default = model_cyto2.eval(image, channels=[0, 0], flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]\n",
+        "labels_none = model_cyto2.eval(image, channels=[0, 0], diameter = None, flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]\n",
+        "labels_d70 = model_cyto2.eval(image, channels=[0, 0],diameter=70,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]\n",
+        "labels_d140 = model_cyto2.eval(image, channels=[0, 0],diameter=140,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]\n",
+        "#fig = imshow_multi2d([image, labels_d6, labels_default, labels_none, labels_d70, labels_d140], ['truth', 'cyto2 d=6', 'cyto2 default', 'cyto2 None', 'cyto2 d=70','cyto2 d=140'], 6 ,1, width = 12, height = 22)\n",
+        "\n",
+        "height = 2.6 "
+      ],
+      "id": "f532a77f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig = imshow2d(truth, width=8, height=height)\n",
+        "stop=fig.suptitle('Truth')\n",
+        "fig = imshow2d(labels_d6, width=8, height=height)\n",
+        "stop=fig.suptitle('diameter=6')"
+      ],
+      "id": "639dda3c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## diameter=30"
+      ],
+      "id": "46999452"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig = imshow2d(truth, width=8, height=height)\n",
+        "stop=fig.suptitle('Truth')\n",
+        "fig = imshow2d(labels_default, width=8, height=height)\n",
+        "stop=fig.suptitle('diameter=30')"
+      ],
+      "id": "254d6eec",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## diameter=70"
+      ],
+      "id": "275e7b05"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig = imshow2d(truth, width=8, height=height)\n",
+        "stop=fig.suptitle('Truth')\n",
+        "fig = imshow2d(labels_d70, width=8, height=height)\n",
+        "stop=fig.suptitle('diameter=70')"
+      ],
+      "id": "79309128",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## diameter = 140"
+      ],
+      "id": "b34b738f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig = imshow2d(truth, width=8, height=height)\n",
+        "stop=fig.suptitle('Truth')\n",
+        "fig = imshow2d(labels_d140, width=8, height=height)\n",
+        "stop=fig.suptitle('diameter=140')"
+      ],
+      "id": "677bdfa7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Train custom model\n",
+        "```\n",
+        "train.train_seg(model_custom.net, X, Y, \n",
+        "    channels=[0,0], \n",
+        "    save_path=model_path, \n",
+        "    n_epochs=180,\n",
+        "    min_train_masks=1,\n",
+        "    normalize = False,\n",
+        "    rescale = False,  \n",
+        "    model_name=model_name)\n",
+        "```\n",
+        "## Custom model (diameter=30)"
+      ],
+      "id": "44433313"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "#| include: false \n",
+        "model_path = r'./models/custom' \n",
+        "\n",
+        "model_custom = models.CellposeModel(gpu=True, model_type=None, pretrained_model= model_path)\n",
+        "labels_custom = model_custom.eval(image, channels=[0, 0],diameter=30,flow_threshold=flow_threshold, cellprob_threshold=cellprob_threshold)[0]"
+      ],
+      "id": "eb2e0458",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig = imshow2d(truth, width=8, height=height)\n",
+        "stop=fig.suptitle('Truth')\n",
+        "fig = imshow2d(labels_custom, width=8, height=height)\n",
+        "stop=fig.suptitle('Custom model')"
+      ],
+      "id": "045011a1",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\bnort\\miniconda3\\envs\\pytorch_and_SAM3\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

@@ -402,15 +402,10 @@
 <h1>Introduction</h1>
 
 </section>
-<section id="instance-segmentation" class="slide level2">
-<h2>Instance Segmentation</h2>
-</section>
 <section id="outline" class="slide level2">
 <h2>Outline</h2>
 <ul>
-<li>Introduction</li>
 <li>Napari basics</li>
-<li>Organizing Deep Learning Projects</li>
 <li>Train/Validate on one image
 <ul>
 <li>with Napari ROIs</li>
@@ -439,34 +434,12 @@
 <li>Segment anything and everything (SAM)
 <ul>
 <li>visualizing overlapping SAM labels</li>
-</ul></li>
 <li>Segment everything and filter</li>
+</ul></li>
 </ul>
 </section>
-<section id="instance-segmentation-1" class="slide level2">
+<section id="instance-segmentation" class="slide level2">
 <h2>Instance segmentation</h2>
-</section>
-<section id="why-notebooks" class="slide level2">
-<h2>Why notebooks ?</h2>
-<ul>
-<li>Can be useful for developers and non-developers</li>
-<li>Visual</li>
-<li>Compromise between GUI and Code</li>
-</ul>
-</section>
-<section id="why-widgets" class="slide level2">
-<h2>Why Widgets ?</h2>
-<ul>
-<li>Complimentary to notebooks</li>
-<li>Need a GUI for some DL steps
-<ul>
-<li>Can’t draw labels with code</li>
-</ul></li>
-<li>Marketing term ?
-<ul>
-<li>Not quite ready for prime time</li>
-</ul></li>
-</ul>
 </section>
 <section id="links-to-projects-used-in-this-presentation" class="slide level2">
 <h2>Links to projects used in this presentation</h2>
@@ -531,7 +504,7 @@
 </section>
 <section id="test-image" class="slide level2">
 <h2>Test image</h2>
-<div id="df22c094" class="cell" data-execution_count="1">
+<div id="e0aeb4dc" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -543,7 +516,7 @@
 </section>
 <section id="start-napari-and-add-layers" class="slide level2">
 <h2>Start Napari and add layers</h2>
-<div id="b6b7c638" class="cell" data-execution_count="2">
+<div id="e9b0bc36" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>viewer <span class="op">=</span> napari.Viewer()</span>
 <span id="cb1-2"><a href=""></a></span>
 <span id="cb1-3"><a href=""></a>labels <span class="op">=</span> np.zeros([img.shape[<span class="dv">0</span>], img.shape[<span class="dv">1</span>]], dtype<span class="op">=</span>np.uint16)</span>
@@ -558,7 +531,7 @@
 </section>
 <section id="add-a-cellpose-layer" class="slide level2">
 <h2>Add a cellpose layer</h2>
-<div id="ffcb8f01" class="cell" data-execution_count="3">
+<div id="51b97da5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">from</span> cellpose <span class="im">import</span> models, io</span>
 <span id="cb2-2"><a href=""></a>model_cyto3 <span class="op">=</span> models.CellposeModel(gpu<span class="op">=</span><span class="va">True</span>, model_type<span class="op">=</span><span class="st">"cyto3"</span>)</span>
 <span id="cb2-3"><a href=""></a>results <span class="op">=</span> np.zeros([img.shape[<span class="dv">0</span>], img.shape[<span class="dv">1</span>]], dtype<span class="op">=</span>np.uint16)</span>
@@ -566,72 +539,11 @@
 <span id="cb2-5"><a href=""></a>results <span class="op">=</span> model_cyto3.<span class="bu">eval</span>(img, diameter<span class="op">=</span><span class="dv">140</span>)</span>
 <span id="cb2-6"><a href=""></a>viewer.layers[<span class="st">'cyto3 masks'</span>].data <span class="op">=</span> results[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="33f2c6f3" class="cell" data-execution_count="4">
+<div id="e4098b48" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
 <p><img data-src="presentation_files/figure-revealjs/cell-5-output-1.png" width="760" height="416"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="get-the-roi-and-labels-we-drew-in-napari" class="slide level2">
-<h2>Get the ROI and labels we drew in Napari</h2>
-<div id="0cc25dfa" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-6-output-1.png" width="798" height="384"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="file-organization" class="slide level2">
-<h2>File Organization</h2>
-<p>Deep learning is</p>
-<ul>
-<li>60% file organization</li>
-<li>40% drawing</li>
-</ul>
-</section>
-<section id="types-of-files" class="slide level2">
-<h2>Types of files</h2>
-<ul>
-<li><strong>annotations</strong>: the annotated images<br>
-</li>
-<li><strong>labels</strong>: The annotations used for training<br>
-</li>
-<li><strong>patches</strong>: Patches are regions extracted from labels and augmented. You can have potentially thousands of patches.
-<ul>
-<li>Often computed ‘lazily’ during training</li>
-</ul></li>
-</ul>
-</section>
-<section id="types-of-files-1" class="slide level2">
-<h2>Types of files</h2>
-<ul>
-<li><strong>models</strong>: Files contianing model weights</li>
-<li><strong>predictions</strong>: Predictions generated from models<br>
-</li>
-<li><strong>yolo-labels/patches/predictions</strong>: These are bounding boxes useful for some DL approaches</li>
-</ul>
-</section>
-<section id="file-organization-1" class="slide level2">
-<h2>File Organization</h2>
-
-<img data-src="./file-organization.jpg" class="r-stretch"></section>
-<section id="explore-and-label-data" class="slide level2">
-<h2>Explore and label data</h2>
-</section>
-<section id="explore-and-label-data-1" class="slide level2">
-<h2>Explore and label data</h2>
-<div id="638c0548" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-8-output-1.png" width="760" height="416"></p>
 </figure>
 </div>
 </div>
@@ -704,6 +616,13 @@
 <section id="section-2" class="title-slide slide level1 center" data-background-image="./patches.jpg" data-background-size="contain">
 <h1></h1>
 
+</section>
+
+<section id="train" class="title-slide slide level1 center">
+<h1>Train</h1>
+<ul>
+<li>train on augmented patches</li>
+</ul>
 </section>
 
 <section id="prediction" class="title-slide slide level1 center">
@@ -793,44 +712,17 @@
 </ul>
 </section>
 
+<section id="sparse-labels" class="title-slide slide level1 center">
+<h1>Sparse Labels</h1>
+
+</section>
+
 <section id="section-8" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse.png" data-background-size="contain">
 <h1></h1>
 
 </section>
 
-<section id="predictions" class="title-slide slide level1 center">
-<h1>Predictions</h1>
-<ul>
-<li>following predictions are from model trained with sparse labels</li>
-</ul>
-</section>
-
-<section id="section-9" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-1-prediction.png" data-background-size="contain">
-<h1></h1>
-
-</section>
-
-<section id="section-10" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-2-prediction.png" data-background-size="contain">
-<h1></h1>
-
-</section>
-
-<section id="section-11" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-0-prediction.png" data-background-size="contain">
-<h1></h1>
-
-</section>
-
-<section id="again-the-labels" class="title-slide slide level1 center">
-<h1>Again the labels…</h1>
-
-</section>
-
-<section id="section-12" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse.png" data-background-size="contain">
-<h1></h1>
-
-</section>
-
-<section id="section-13" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-2.png" data-background-size="contain">
+<section id="section-9" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-2.png" data-background-size="contain">
 <h1></h1>
 
 </section>
@@ -840,18 +732,18 @@
 
 </section>
 
-<section id="section-14" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-1-prediction.png" data-background-size="contain">
+<section id="section-10" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-1-prediction.png" data-background-size="contain">
 <h1></h1>
 
 </section>
 
-<section id="section-15" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-2-prediction.png" data-background-size="contain">
+<section id="section-11" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-2-prediction.png" data-background-size="contain">
 <h1></h1>
 
 </section>
 
 <section>
-<section id="section-16" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-0-prediction.png" data-background-size="contain">
+<section id="section-12" class="title-slide slide level1 center" data-background-image="./easy-augment-sparse-0-prediction.png" data-background-size="contain">
 <h1></h1>
 
 </section>
@@ -867,18 +759,18 @@
 </section>
 <section id="phantom-image" class="slide level2">
 <h2>Phantom Image</h2>
-<div id="8eecc4aa" class="cell" data-execution_count="9">
+<div id="fb9757ab" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-10-output-1.png" width="649" height="311"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-6-output-1.png" width="649" height="311"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-10-output-2.png" width="649" height="311"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-6-output-2.png" width="649" height="311"></p>
 </figure>
 </div>
 </div>
@@ -889,18 +781,18 @@
 </section>
 <section id="diameter6" class="slide level2">
 <h2>diameter=6</h2>
-<div id="623f3a95" class="cell" data-execution_count="11">
+<div id="f1679c90" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-12-output-1.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-8-output-1.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-12-output-2.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-8-output-2.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
@@ -908,18 +800,18 @@
 </section>
 <section id="diameter30" class="slide level2">
 <h2>diameter=30</h2>
-<div id="5de01ada" class="cell" data-execution_count="12">
+<div id="791206a1" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-13-output-1.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-9-output-1.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-13-output-2.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-9-output-2.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
@@ -927,18 +819,18 @@
 </section>
 <section id="diameter70" class="slide level2">
 <h2>diameter=70</h2>
-<div id="4fec872e" class="cell" data-execution_count="13">
+<div id="604d11dd" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-14-output-1.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-10-output-1.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-14-output-2.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-10-output-2.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
@@ -946,18 +838,18 @@
 </section>
 <section id="diameter-140" class="slide level2">
 <h2>diameter = 140</h2>
-<div id="cb6831a2" class="cell" data-execution_count="14">
+<div id="cef24497" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-15-output-1.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-11-output-1.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-15-output-2.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-11-output-2.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
@@ -976,18 +868,18 @@
 </section>
 <section id="custom-model-diameter30" class="slide level2">
 <h2>Custom model (diameter=30)</h2>
-<div id="4cf73710" class="cell" data-execution_count="16">
+<div id="60771aa2" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-17-output-1.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-13-output-1.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-17-output-2.png" width="589" height="259"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-13-output-2.png" width="589" height="259"></p>
 </figure>
 </div>
 </div>
@@ -1002,11 +894,11 @@
 </section>
 <section id="create-a-2d-object" class="slide level2">
 <h2>Create a 2D Object</h2>
-<div id="2bae40fe" class="cell" data-execution_count="17">
+<div id="8791c8f3" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-18-output-1.png" width="645" height="710"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-14-output-1.png" width="645" height="710"></p>
 </figure>
 </div>
 </div>
@@ -1043,7 +935,7 @@
 </ul>
 </section></section>
 <section>
-<section id="section-17" class="title-slide slide level1 center" data-background-image="./stardist-receptive-field.png">
+<section id="section-13" class="title-slide slide level1 center" data-background-image="./stardist-receptive-field.png">
 <h1></h1>
 
 </section>
@@ -1058,11 +950,11 @@
 </section>
 <section id="cyto3-results" class="slide level2">
 <h2>Cyto3 Results</h2>
-<div id="d80b777a" class="cell" data-execution_count="19">
+<div id="7be3d36f" class="cell" data-execution_count="15">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-20-output-1.png" width="798" height="278"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-16-output-1.png" width="798" height="278"></p>
 </figure>
 </div>
 </div>
@@ -1114,11 +1006,11 @@
 </section>
 <section id="retrained-defaults" class="slide level2">
 <h2>Retrained defaults</h2>
-<div id="74402051" class="cell" data-execution_count="21">
+<div id="384602a4" class="cell" data-execution_count="17">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-22-output-1.png" width="649" height="651"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-18-output-1.png" width="649" height="651"></p>
 </figure>
 </div>
 </div>
@@ -1126,11 +1018,11 @@
 </section>
 <section id="retrained-no-rescaling" class="slide level2">
 <h2>Retrained no rescaling</h2>
-<div id="ce804413" class="cell" data-execution_count="22">
+<div id="a45f4389" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-23-output-1.png" width="649" height="651"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-19-output-1.png" width="649" height="651"></p>
 </figure>
 </div>
 </div>
@@ -1143,6 +1035,7 @@
 <li>10 labeled</li>
 <li>no rescaling during training</li>
 <li>bsize = 512</li>
+<li>niter = 5000 during prediction</li>
 </ul>
 </section>
 <section id="model-training-on-sequence-1" class="slide level2">
@@ -1170,17 +1063,17 @@
 
 </section>
 
-<section id="section-18" class="title-slide slide level1 center" data-background-image="./ladybug-scale-1.png">
+<section id="section-14" class="title-slide slide level1 center" data-background-image="./ladybug-scale-1.png">
 <h1></h1>
 
 </section>
 
-<section id="section-19" class="title-slide slide level1 center" data-background-image="./ladybug-scale-2.png">
+<section id="section-15" class="title-slide slide level1 center" data-background-image="./ladybug-scale-2.png">
 <h1></h1>
 
 </section>
 
-<section id="section-20" class="title-slide slide level1 center" data-background-image="./ladybug-scale-3.png">
+<section id="section-16" class="title-slide slide level1 center" data-background-image="./ladybug-scale-3.png">
 <h1></h1>
 
 </section>
@@ -1207,17 +1100,17 @@
 </ul>
 </section>
 
-<section id="section-21" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-1.png">
+<section id="section-17" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-1.png">
 <h1></h1>
 
 </section>
 
-<section id="section-22" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-2.png">
+<section id="section-18" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-2.png">
 <h1></h1>
 
 </section>
 
-<section id="section-23" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-3.png">
+<section id="section-19" class="title-slide slide level1 center" data-background-image="./ladybug-scale-prediction-3.png">
 <h1></h1>
 
 </section>
@@ -1229,27 +1122,27 @@
 </ul>
 </section>
 
-<section id="section-24" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-1.png">
+<section id="section-20" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-1.png">
 <h1></h1>
 
 </section>
 
-<section id="section-25" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-2.png">
+<section id="section-21" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-2.png">
 <h1></h1>
 
 </section>
 
-<section id="section-26" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-3.png">
+<section id="section-22" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-3.png">
 <h1></h1>
 
 </section>
 
-<section id="section-27" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-4.png">
+<section id="section-23" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-4.png">
 <h1></h1>
 
 </section>
 
-<section id="section-28" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-5.png">
+<section id="section-24" class="title-slide slide level1 center" data-background-image="./ladybug-scale-validation-5.png">
 <h1></h1>
 
 </section>
@@ -1356,11 +1249,11 @@
 </section>
 <section id="original-and-segmented" class="slide level2">
 <h2>Original and Segmented</h2>
-<div id="0f349573" class="cell" data-execution_count="26">
+<div id="315dee0f" class="cell" data-execution_count="22">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-27-output-1.png" width="807" height="332"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-23-output-1.png" width="807" height="332"></p>
 </figure>
 </div>
 </div>
@@ -1368,15 +1261,22 @@
 </section>
 <section id="filter" class="slide level2">
 <h2>Filter</h2>
-<div id="582cd02c" class="cell" data-execution_count="27">
+<div id="07eb5cf2" class="cell" data-execution_count="23">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-28-output-1.png" width="807" height="332"></p>
+<p><img data-src="presentation_files/figure-revealjs/cell-24-output-1.png" width="807" height="332"></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="section-25" class="slide level2">
+<h2></h2>
+<video id="myVideo" width="900" height="600" autoplay="" loop="" muted="" controls="">
+  <source src="napari-SAM-big-lady-bug.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 </section>
 <section id="look-at-labels" class="slide level2">
 <h2>Look at labels</h2>
