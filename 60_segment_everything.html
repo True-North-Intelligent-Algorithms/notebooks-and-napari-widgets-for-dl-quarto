@@ -347,9 +347,14 @@
 <li>SAM stands for Segment Anything Model.</li>
 <li>Prompt based generalist image segmentation.
 <ul>
-<li>Prompt is a hint as to what object(s) to segment</li>
-<li>Prompt can be a point, boundin box, or even a mask (first guess)</li>
+<li>Prompt is hint</li>
+<li>can be a point, bounding box, or even a mask (first guess)</li>
 </ul></li>
+</ul>
+</section>
+<section id="what-is-sam-1" class="slide level2">
+<h2>What is SAM ?</h2>
+<ul>
 <li>Good at detecting overlapping objects (spots on Ladybugs)
 <ul>
 <li>multiple prompts -&gt; multiple masks</li>
@@ -363,7 +368,14 @@
 <ul>
 <li>this example uses <a href="(https://github.com/ChaoningZhang/MobileSAM)">mobile SAM</a> and <a href="https://www.napari-hub.org/plugins/napari-segment-everything">napari-segment-everything</a></li>
 </ul>
-<div id="fc989198" class="cell" data-execution_count="1">
+</section>
+<section id="viewing-and-exploring-overlapping-labels-1" class="slide level2">
+<h2>Viewing and exploring overlapping labels</h2>
+
+<img data-src="./data/ladybugs_SAM/620818_780868.jpg" class="r-stretch"></section>
+<section id="viewing-and-exploring-overlapping-labels-2" class="slide level2">
+<h2>Viewing and exploring overlapping labels</h2>
+<div id="2110c48d" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -375,37 +387,21 @@
 </section>
 <section id="segment-bounding-boxes" class="slide level2">
 <h2>Segment bounding boxes</h2>
-<div id="c93b5e88" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="60_segment_everything_files/figure-revealjs/cell-4-output-1.png" width="760" height="416"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
+
+<img data-src="./yolo-masks.png" class="r-stretch"></section>
 <section id="sam-with-yolo-bbs-as-prompt" class="slide level2">
 <h2>SAM with Yolo bbs as prompt</h2>
-<div id="2d34edf8" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="60_segment_everything_files/figure-revealjs/cell-6-output-1.png" width="760" height="416"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
+
+<img data-src="./yolo-sam-masks.png" class="r-stretch"></section>
 <section id="rotate-to-see-relationships" class="slide level2">
 <h2>Rotate to see relationships</h2>
-<video id="myVideo" width="640" height="360" autoplay="" loop="" muted="" controls="">
+<video id="myVideo" width="900" height="600" autoplay="" loop="" muted="" controls="">
 <source src="./napari-segmnet-everything.mp4" type="video/mp4">
 <p>Your browser does not support the video tag. </p>
 </video></section>
 <section id="pan-and-zoom" class="slide level2">
 <h2>Pan and zoom</h2>
-<video id="myVideo" width="640" height="360" autoplay="" loop="" muted="" controls="">
+<video id="myVideo" width="900" height="600" autoplay="" loop="" muted="" controls="">
 <source src="./napari-segmnet-everything-2.mp4" type="video/mp4">
 <p>Your browser does not support the video tag. </p>
 

@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "05_introduction.html#why-notebooks",
+    "href": "05_introduction.html#why-notebooks",
+    "title": "Notebooks and Widgets for Deep Learning",
+    "section": "Why notebooks ?",
+    "text": "Why notebooks ?\n\nCan be useful for developers and non-developers\nVisual\nCompromise between GUI and Code"
+  },
+  {
+    "objectID": "05_introduction.html#why-widgets",
+    "href": "05_introduction.html#why-widgets",
+    "title": "Notebooks and Widgets for Deep Learning",
+    "section": "Why Widgets ?",
+    "text": "Why Widgets ?\n\nComplimentary to notebooks\nNeed a GUI for some DL steps\n\nCan’t draw labels with code\n\nMarketing term ?\n\nNot quite ready for prime time"
+  },
+  {
+    "objectID": "05_introduction.html#links-to-projects-used-in-this-presentation",
+    "href": "05_introduction.html#links-to-projects-used-in-this-presentation",
+    "title": "Notebooks and Widgets for Deep Learning",
+    "section": "Links to projects used in this presentation",
+    "text": "Links to projects used in this presentation\nLink to slides\nCourse material from virtual I2k2024\ntnia-python - My helper library\neasy-augment-batch-dl A plugin to perform deep learning on small to medium sized image sets with UNETs, Cellpose, Stardist, SAM and friends.\nsegment-everything - Utilities for rendering and training prompt-based and overlapping segmentation models (like SAM).\nnapari-segment-everything - This is a Napari GUI for segment-everything"
+  },
+  {
+    "objectID": "05_introduction.html#training-validation-and-test-sets",
+    "href": "05_introduction.html#training-validation-and-test-sets",
+    "title": "Notebooks and Widgets for Deep Learning",
+    "section": "Training, Validation and test sets",
+    "text": "Training, Validation and test sets\n\nTraining - data that is input to the model\n\nideally get almost ‘perfect’ results when predicting on training set\nif not settings issue?\nOr dl approach not appropriate for problem\n\nTesting - Data not fed to model, but used to tune parameters during training. Hints at how well model generalizes but can be deceptive.\nTest - unseen partition used to evaluate how well model generalize"
+  }
+]

@@ -1,0 +1,72 @@
+
+## File Organization
+
+Deep learning is
+
+* 60% file organization
+* 40% drawing
+
+## Types of files
+
+* **annotations**:  the annotated images  
+* **labels**: The annotations used for training   
+* **patches**: Patches are regions extracted from labels and augmented.  You can have potentially thousands of patches.  
+    * Often computed 'lazily' during training
+
+## Types of files
+
+* **models**:  Files contianing model weights
+* **predictions**: Predictions generated from models  
+* **yolo-labels/patches/predictions**: These are bounding boxes useful for some DL approaches 
+
+## File Organization
+
+![](./file-organization.jpg)
+
+## Explore and label data 
+
+```{python}
+#| echo: false
+#| include: false 
+import os
+import numpy as np
+import napari
+from napari_easy_augment_batch_dl import easy_augment_batch_dl
+import matplotlib.pyplot as plt
+
+viewer = napari.Viewer()
+
+batch_dl = easy_augment_batch_dl.NapariEasyAugmentBatchDL(viewer, label_only = False)
+
+viewer.window.add_dock_widget(
+    batch_dl
+)
+
+data_path = r'./data'
+parent_path = os.path.join(data_path, 'ladybugs1')
+model_path = os.path.join(parent_path, 'models')
+
+batch_dl.load_image_directory(parent_path)
+
+model_name = 'cellpose_for_ladybugs'
+
+model_type = "CellPose Instance Model"
+batch_dl.network_architecture_drop_down.setCurrentText(model_type)
+batch_dl.deep_learning_project.set_pretrained_model(os.path.join(model_path, model_name), model_type)
+
+```
+
+## Explore and label data
+
+```{python}
+
+screenshot = viewer.screenshot(r'./napari_screenshot.png', canvas_only=False)
+plt.imshow(screenshot)
+
+```
+
+```{python}
+#| echo: false
+#| include: false 
+viewer.close()
+```

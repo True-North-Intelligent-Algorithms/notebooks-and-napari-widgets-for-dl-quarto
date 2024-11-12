@@ -1,0 +1,80 @@
+
+## Instance Segmentation
+
+## Outline
+
+* Introduction
+* Napari basics
+* Organizing Deep Learning Projects
+* Train/Validate on one image
+    * with Napari ROIs
+
+## Outline
+
+* Sparse
+    * Stardist with sparse labels
+* Scale
+    * Cellpose at different scales
+    * Stardist receptive field
+    * thin protrusions
+    * Lady bugs at different scales
+
+## Outline
+
+* Segment anything and everything (SAM)
+    * visualizing overlapping SAM labels
+* Segment everything and filter
+
+## Instance segmentation
+
+## Why notebooks ? 
+
+* Can be useful for developers and non-developers
+* Visual
+* Compromise between GUI and Code
+
+## Why Widgets ?
+
+* Complimentary to notebooks
+* Need a GUI for some DL steps 
+    * Can't draw labels with code
+* Marketing term ?
+    * Not quite ready for prime time
+
+## Links to projects used in this presentation 
+
+[Link to slides](https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl-quarto)
+
+[Course material](https://true-north-intelligent-algorithms.github.io/notebooks-and-napari-widgets-for-dl/intro.html) from virtual I2k2024
+
+[tnia-python](https://github.com/True-North-Intelligent-Algorithms/tnia-python) - My helper library
+
+
+## Links to projects used in this presentation
+
+[easy-augment-batch-dl](https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl) deep learning on image sets with UNETs, Cellpose, Stardist, SAM and friends.
+
+[segment-everything](https://github.com/True-North-Intelligent-Algorithms/segment-everything) - Utilities for rendering and training prompt-based and overlapping segmentation models (like SAM).  
+
+[napari-segment-everything](https://github.com/True-North-Intelligent-Algorithms/napari-segment-everything) - This is a Napari GUI for segment-everything
+
+## Training, Validation and test sets
+
+* Training - data that is input to the model
+    * ideally get almost 'perfect' results when predicting on training set
+    * Or dl approach not appropriate for problem
+* Validation 
+    * Data not fed to model
+    * used to tune parameters during training.  
+    * Hints at how well model generalizes but can be deceptive. 
+
+## Training, Validation and test sets
+* Test 
+    * unseen partition 
+    * used to evaluate how well model generalize
+    * as soon as we see it becomes validation
+
+# 
+![Bee Predictions](./bee-predictions.png)
+
+

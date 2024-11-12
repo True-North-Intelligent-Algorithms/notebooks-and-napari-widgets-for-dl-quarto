@@ -1,0 +1,55 @@
+# Sparse Labeling
+* [See CellSparse discusion](https://forum.image.sc/t/cellsparse-training-deep-learning-models-for-cell-image-segmentation-with-sparse-annotations/82419)
+
+# Instance Labeling
+
+* 2 groups
+    * Objects (assigned unique index)
+    * background (no index)
+    * Need to label everything in a patch
+
+# {background-image="./easy-augment-one-image.png" background-size="contain"}
+
+# Sparse Labeling
+
+* 3 groups
+    * Objects
+    * Background
+    * Not labeled
+
+# {background-image="./easy-augment-sparse.png" background-size="contain"}
+# {background-image="./easy-augment-one-image.png" background-size="contain"}
+
+
+# Sparse labeling
+
+* Why ?
+    * Save work
+    * Better sampling
+
+# Sparse Labeling
+
+* Why not ?
+    * Fewer 'edges' between tightly clustered objects. 
+    
+# {background-image="./easy-augment-sparse.png" background-size="contain"}
+
+# Predictions
+
+* following predictions are from model trained with sparse labels
+
+# {background-image="./easy-augment-sparse-1-prediction.png" background-size="contain"}
+# {background-image="./easy-augment-sparse-2-prediction.png" background-size="contain"}
+# {background-image="./easy-augment-sparse-0-prediction.png" background-size="contain"}
+
+# Again the labels...
+
+# {background-image="./easy-augment-sparse.png" background-size="contain"}
+# {background-image="./easy-augment-sparse-2.png" background-size="contain"}
+
+# And the predictions
+
+# {background-image="./easy-augment-sparse-1-prediction.png" background-size="contain"}
+# {background-image="./easy-augment-sparse-2-prediction.png" background-size="contain"}
+# {background-image="./easy-augment-sparse-0-prediction.png" background-size="contain"}
+

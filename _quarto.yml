@@ -1,0 +1,18 @@
+title: "Notebooks and Widgets for Deep Learning"
+format:
+  revealjs:
+          theme: default
+          slide-number: true
+          footer: Northeast Bioimage Analysis Meeting
+          transition: "slide"
+          highlight-style: arrow
+          chalkboard: 
+              buttons: false
+          controls-layout: bottom-right
+  html:
+    code-fold: true
+jupyter: python3
+
+files:
+  - "05_introduction.qmd"
+  - "10_napari_basics.qmd"

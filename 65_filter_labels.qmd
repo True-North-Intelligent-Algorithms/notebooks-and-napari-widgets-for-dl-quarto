@@ -1,0 +1,107 @@
+---
+title: "Notebooks and Napari Widgets for Deep Learning"
+format:
+  revealjs:
+          theme: default
+          slide-number: true
+          footer: Northeast Bioimage Analysis Meeting
+          transition: "slide"
+          highlight-style: arrow
+          chalkboard: 
+              buttons: false
+          controls-layout: bottom-right
+jupyter: python3
+---
+
+## Filtering Labels
+
+* SAM can return hundreds or thousands of labels.   
+* Many of the labels may not be of interest.  
+
+## Strategies to Filter labels
+
+*  Train the prompt detector to also classify objects 
+    * YOLO can be trained to classify then only keep the prompts corresponding to classes of interest. 
+
+* Filter the labels by a criteria so we only keep objects of interest.  
+* This example shows the latter strategy. 
+
+```{python}
+from segment_everything.detect_and_segment import segment_from_stacked_labels
+from segment_everything.prompt_generator import YoloDetector
+from segment_everything.weights_helper import get_weights_path
+from segment_everything.stacked_labels import StackedLabels
+from segment_everything.detect_and_segment import segment_from_stacked_labels
+import matplotlib.pyplot as plt
+from tnia.plotting.plt_helper import random_label_cmap, mask_overlay, imshow_multi2d
+import numpy as np
+from skimage.io import imread
+import os
+
+conf = 0.1
+iou = 0.8
+imagesz = 4096
+descriptor = "MobileSAM Model"
+boxes = True
+
+yolo_detecter = YoloDetector(str(get_weights_path("ObjectAwareModel")), "ObjectAwareModelFromMobileSamV2", device='cuda')
+
+data_path = r'./data'
+parent_path = os.path.join(data_path, 'ladybugs_SAM')
+#image_name = os.path.join(parent_path, '5784124_7185843.jpg')
+image_name = os.path.join(parent_path, '620818_780868.jpg')
+img = imread(image_name)
+```
+
+
+```{python}
+#| echo: false
+#| include: false 
+results = yolo_detecter.get_results(img, conf=conf, iou= iou, imgsz=imagesz, max_det=10000)
+bbs=results[0].boxes.xyxy.cpu().numpy()
+stacked_labels = StackedLabels.from_yolo_results(bbs, None, img)
+segmented_stacked_labels = segment_from_stacked_labels(stacked_labels, "MobileSamV2")
+segmented_stacked_labels.sort_largest_to_smallest()
+labels = segmented_stacked_labels.make_2d_labels(type="min")
+
+```
+
+## Original and Segmented
+
+```{python}
+overlay_img = mask_overlay(img, labels)
+
+#plt.imshow(overlay_img, cmap=random_label_cmap())
+fig = imshow_multi2d([img, overlay_img], ["Original", "Segmented"], 1, 2)
+```
+
+## Filter 
+
+```{python}
+#add_properties_to_label_image(img, segmented_stacked_labels.mask_list)
+segmented_stacked_labels.add_properties_to_label_image()
+
+stat_limits = {
+    "area": {"min": 0, "max": 1000},
+    "label_num": {"min": -100000000, "max": 10000000000},
+    "solidity": {"min": 0.0, "max": 1.0},
+    "circularity": {"min": 0.0, "max": 1.0},
+    "mean_intensity": {"min": 0, "max": 255},
+    "10th_percentile_intensity": {"min": 0, "max": 255},
+    "mean_hue": {"min": 0, "max": 360},
+    "mean_saturation": {"min": 0.0, "max": 1000},
+    "predicted_iou": {"min": 0.0, "max": 1.0},
+    "stability_score": {"min": 0.0, "max": 1.0}
+}
+
+segmented_stacked_labels.filter_labels_3d_multi(stat_limits)
+labels = segmented_stacked_labels.make_2d_labels(type="min")
+
+overlay_img = mask_overlay(img, labels)
+
+#plt.imshow(overlay_img, cmap=random_label_cmap())
+fig = imshow_multi2d([img, overlay_img], ["Original", "Segmented"], 1, 2)
+```
+
+## Look at labels  
+[Overlays](slideshow.html)

@@ -1,0 +1,47 @@
+## Stardist receptive field
+
+* region of input that influences output
+* impacted by striding, kernel size and number of layers
+
+## Create a 2D Object
+
+``` {python}
+import raster_geometry as rg
+from tnia.plotting.plt_helper import imshow2d
+import numpy as np
+import matplotlib.pyplot as plt
+
+radius = 75
+xy_spacing = 1
+
+image_size = 256
+xy_pixels_radius = int(radius / xy_spacing)
+
+#print(f'xy_pixels_radius {xy_pixels_radius}')
+
+ellipsoid2D = rg.ellipse([image_size, image_size], [xy_pixels_radius, xy_pixels_radius]).astype('uint8')*255
+
+fig = imshow2d(ellipsoid2D, 8,8)
+temp = fig.suptitle('ellipsoid2D')
+
+```
+
+## Design Stardist 2D Network
+
+* Larger grid 
+    * means larger stride thus 'see's' more 1st level
+* Larger kernel 
+    * see's more each level
+* More levels
+    * each level images are downsampled
+    * kernels at that level process larger spacial region
+
+## Empiricaly measure receptive field
+
+* see [stardist 3D training example notebook](https://github.com/stardist/stardist/blob/master/examples/3D/2_training.ipynb)
+* applies the model to a single point
+* measures how far information - flows
+    * doesn't matter if the network has been trained
+    * just interested in information flow
+
+# {background-image="./stardist-receptive-field.png"}

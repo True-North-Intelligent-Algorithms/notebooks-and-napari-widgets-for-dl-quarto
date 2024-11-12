@@ -1,5 +1,5 @@
 ---
-title: "Notebooks and Widgets for Deep Learning"
+title: "Notebooks and Napari Widgets for Deep Learning"
 format:
   revealjs:
           theme: default
@@ -24,8 +24,11 @@ jupyter: python3
 
 * SAM stands for Segment Anything Model. 
 * Prompt based generalist image segmentation.
-  * Prompt is a hint as to what object(s) to segment
-  * Prompt can be a point, boundin box, or even a mask (first guess)
+  * Prompt is hint 
+  * can be a point, bounding box, or even a mask (first guess)
+
+
+## What is SAM ?
 * Good at detecting overlapping objects (spots on Ladybugs)
   * multiple prompts -> multiple masks
   * masks may overlap
@@ -35,7 +38,13 @@ jupyter: python3
 
 * this example uses [mobile SAM]((https://github.com/ChaoningZhang/MobileSAM)) and [napari-segment-everything](https://www.napari-hub.org/plugins/napari-segment-everything)
 
+## Viewing and exploring overlapping labels
+![](./data/ladybugs_SAM/620818_780868.jpg)
+
 ```{python}  
+#| echo: false
+#| include: false 
+
 from segment_everything.detect_and_segment import segment_from_stacked_labels
 from segment_everything.prompt_generator import YoloDetector
 from segment_everything.weights_helper import get_weights_path
@@ -66,66 +75,28 @@ plt.imshow(img)
 ```
 
 ## Segment bounding boxes
-```{python}
-#| echo: false
-#| include: false 
-results = yolo_detecter.get_results(img, conf=conf, iou= iou, imgsz=imagesz, max_det=10000)
-bbs=results[0].boxes.xyxy.cpu().numpy()
-stacked_labels = StackedLabels.from_yolo_results(bbs, None, img)
-
-import napari
-from  napari_segment_everything import segment_everything
-
-viewer = napari.Viewer()
-segment_everything_widget=segment_everything.NapariSegmentEverything(viewer)
-viewer.window.add_dock_widget(segment_everything_widget)
-segment_everything_widget.load_project(stacked_labels.image, stacked_labels.mask_list)
-```
-
-```{python}
-screenshot = viewer.screenshot(r'./yolo_masks.png', canvas_only=False)
-plt.imshow(screenshot)
-viewer.close()
-```
+![](./yolo-masks.png)  
 
 ## SAM with Yolo bbs as prompt
-
-```{python}
-#| echo: false
-#| include: false 
-segmented_stacked_labels = segment_from_stacked_labels(stacked_labels, "MobileSamV2")
-segmented_stacked_labels.sort_largest_to_smallest()
-labels = segmented_stacked_labels.make_2d_labels(type="min")
-
-viewer = napari.Viewer()
-segment_everything_widget=segment_everything.NapariSegmentEverything(viewer)
-viewer.window.add_dock_widget(segment_everything_widget)
-segment_everything_widget.load_project(segmented_stacked_labels.image, segmented_stacked_labels.mask_list)
-
-```
-
-```{python}
-screenshot = viewer.screenshot(r'./SAM_masks.png', canvas_only=False)
-plt.imshow(screenshot)
-viewer.close()
-```
+![](./yolo-sam-masks.png)
 
 ## Rotate to see relationships 
 
 ```{=html}
-<video id="myVideo" width="640" height="360" autoplay loop muted controls>
+<video id="myVideo" width="900" height="600" autoplay loop muted controls>
   <source src="./napari-segmnet-everything.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+```
 
 ## Pan and zoom 
 
 ```{=html}
-<video id="myVideo" width="640" height="360" autoplay loop muted controls>
+<video id="myVideo" width="900" height="600" autoplay loop muted controls>
   <source src="./napari-segmnet-everything-2.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-
+```
 
 
 

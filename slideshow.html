@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <img id="slider-image" src="overlays2/image0.jpg" alt="Slider Image" width="1800">
+        <div>
+            <button onclick="prevImage()">Previous</button>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const totalImages = 20;  // Number of images in the directory
+        let currentImageIndex = 1;
+
+        function updateImage() {
+            const imageElement = document.getElementById("slider-image");
+            imageElement.src = `overlays2/image${currentImageIndex}.jpg`;
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex % totalImages) + 1;
+            updateImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 2 + totalImages) % totalImages + 1;
+            updateImage();
+        }
+    </script>
+</body>
+</html>

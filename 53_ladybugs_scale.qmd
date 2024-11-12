@@ -1,0 +1,54 @@
+# Ladybugs at different scales
+
+# {background-image="./data/ladybugs_series/8220954_10897041.jpg"}
+# {background-image="./data/ladybugs_series/5622668_6951835.jpg"}
+# {background-image="./data/ladybugs_series/5784124_7185843.jpg"}
+# {background-image="./data/ladybugs_series/6337689_7986324.jpg"}
+
+# How to handle this ? 
+
+* Scale related parameters 
+    * Cellpose ```diameter```
+    * Stardist ```scale```
+* What if hundreds of images ? 
+    * Can we train for different scales ? 
+
+# Label different scales
+
+# {background-image="./ladybug-scale-1.png"}
+# {background-image="./ladybug-scale-2.png"}
+# {background-image="./ladybug-scale-3.png"}
+
+# Self-Prediction 
+
+* predict the training set
+
+# {background-image="./ladybug-scale-prediction-1.png"}
+# {background-image="./ladybug-scale-prediction-2.png"}
+# {background-image="./ladybug-scale-prediction-3.png"}
+
+# Validation
+
+* predict other images in series
+
+# {background-image="./ladybug-scale-validation-1.png"}
+# {background-image="./ladybug-scale-validation-2.png"}
+# {background-image="./ladybug-scale-validation-3.png"}
+# {background-image="./ladybug-scale-validation-4.png"}
+# {background-image="./ladybug-scale-validation-5.png"}
+
+# What next ? 
+
+* only 3 training images !
+* correct and relabel
+    * bigger training set
+* train for longer
+    * more training time needed for larger objects ? 
+* consider auto-rescaling ? 
+* consider other models
+
+
+
+
+
+
