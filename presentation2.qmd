@@ -1,0 +1,31 @@
+---
+title: "Notebooks and Napari Widgets for Deep Learning"
+author: "Brian Northan"
+affiliation: "True North Intelligent Algorithms"
+format:
+ pptx: default
+jupyter: python3
+---
+
+
+{{< include 05_introduction.qmd >}}
+
+{{< include 10_napari_basics.qmd >}}
+
+{{< include 17_label_predict.qmd >}}
+
+{{< include 22_sparse_predict.qmd >}}
+
+{{< include 45_cellpose_scale.qmd >}}
+
+{{< include 47_stardist_receptive_field.qmd >}}
+
+{{< include 50_protrusions.qmd >}}
+
+{{< include 53_ladybugs_scale.qmd >}}
+
+{{< include 60_segment_everything.qmd >}}
+
+{{< include 65_filter_labels.qmd >}}
+
+

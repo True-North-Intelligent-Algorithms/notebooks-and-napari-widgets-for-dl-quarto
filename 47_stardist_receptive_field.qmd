@@ -44,4 +44,4 @@ temp = fig.suptitle('ellipsoid2D')
     * doesn't matter if the network has been trained
     * just interested in information flow
 
-# {background-image="./stardist-receptive-field.png"}
+## {background-image="./stardist-receptive-field.png"}

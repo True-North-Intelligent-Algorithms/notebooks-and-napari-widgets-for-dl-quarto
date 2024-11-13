@@ -1,22 +1,3 @@
----
-title: "Notebooks and Napari Widgets for Deep Learning"
-author: "Brian Northan"
-affiliation: "True North Intelligent Algorithms"
-format:
-  revealjs:
-          theme: default
-          slide-number: true
-          footer: Northeast Bioimage Analysis Meeting
-          transition: "slide"
-          highlight-style: arrow
-          chalkboard: 
-              buttons: false
-          controls-layout: bottom-right
-  html:
-    code-fold: true
-jupyter: python3
----
-
 
 ## Cellpose trained to learn scale
 

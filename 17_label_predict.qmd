@@ -1,5 +1,5 @@
 
-# Train and test model on a single image
+## Train and test model on a single image
 
 ## Why? 
 * Proof of concept
@@ -10,7 +10,7 @@
 * Can't just train/predict on same image
 * Use ROIs to divide image into training/validation
 
-# Train and test model on a single image
+## Train and test model on a single image
 
 * Explore and label data with [napari-easy-augment-batch-dl](https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl)
     * draw and label ROIs
@@ -18,9 +18,9 @@
 * Train
 * Predict and fix mistakes
  
-# {background-image="./easy-augment-one-image.png" background-size="contain"}
+## {background-image="./easy-augment-one-image.png" background-size="contain"}
 
-# Augmentation
+## Augmentation
 
 * From single label can genrate hundred of augmented patches
 * Flip, rotate, resize
@@ -29,23 +29,23 @@
 * Color jitter
 * Elastic transform
 
-# Augmentation
+## Augmentation
 
 * Save explicitly?  
     * can be helpful for troubleshooting, performance and repeatability
 * Augment 'inline'
     * More variation, save diskspace
 
-# {background-image="./patches.jpg" background-size="contain"}
+## {background-image="./patches.jpg" background-size="contain"}
 
-# Train
+## Train
 
 * train on augmented patches
 
-# Prediction
+## Prediction
  * after training go back and predict
     * correct mistakes
 
-# {background-image="./easy-augment-one-image.png" background-size="contain"}
+## {background-image="./easy-augment-one-image.png" background-size="contain"}
 
-# {background-image="./easy-augment-one-image-predict.png" background-size="contain"}
+## {background-image="./easy-augment-one-image-predict.png" background-size="contain"}

@@ -1,10 +1,10 @@
-# Ladybugs at different scales
+## Ladybugs at different scales
 
 # {background-image="./ladybug-scale-1.png"}
 # {background-image="./ladybug-scale-2.png"}
 # {background-image="./ladybug-scale-3.png"}
 
-# How to handle this ? 
+## How to handle this ? 
 
 * Scale related parameters 
     * Cellpose ```diameter```
@@ -12,7 +12,7 @@
 * What if hundreds of images ? 
     * Can we train for different scales ? 
 
-# Self-Prediction 
+## Self-Prediction 
 
 * predict the training set
 
@@ -20,7 +20,7 @@
 # {background-image="./ladybug-scale-prediction-2.png"}
 # {background-image="./ladybug-scale-prediction-3.png"}
 
-# Validation
+## Validation
 
 * predict other images in series
 
@@ -30,7 +30,7 @@
 # {background-image="./ladybug-scale-validation-4.png"}
 # {background-image="./ladybug-scale-validation-5.png"}
 
-# What next ? 
+## What next ? 
 
 * only 3 training images !
 * correct and relabel

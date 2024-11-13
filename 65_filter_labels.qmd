@@ -1,19 +1,4 @@
----
-title: "Notebooks and Napari Widgets for Deep Learning"
-author: "Brian Northan"
-affiliation: "True North Intelligent Algorithms"
-format:
-  revealjs:
-          theme: default
-          slide-number: true
-          footer: Northeast Bioimage Analysis Meeting
-          transition: "slide"
-          highlight-style: arrow
-          chalkboard: 
-              buttons: false
-          controls-layout: bottom-right
-jupyter: python3
----
+
 
 ## Filtering Labels
 
@@ -112,7 +97,6 @@ fig = imshow_multi2d([img, overlay_img], ["Original", "Segmented"], 1, 2)
   Your browser does not support the video tag.
 </video>
 ```
-
 
 
 ## Look at labels  

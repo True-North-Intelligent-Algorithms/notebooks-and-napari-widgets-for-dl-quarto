@@ -1,0 +1,14 @@
+---
+title: "Notebooks and Napari Widgets for Deep Learning"
+author: "Brian Northan"
+affiliation: "True North Intelligent Algorithms"
+format:
+ pptx: default
+jupyter: python3
+---
+
+## TESTER
+
+ok
+
+## Test Test

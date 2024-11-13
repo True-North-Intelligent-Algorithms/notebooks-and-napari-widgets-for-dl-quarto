@@ -76,11 +76,14 @@
 * Validation 
     * Data not fed to model
     * used to tune parameters during training.  
+
+
+## Training, Validation and Test sets
 * Test 
     * unseen partition 
     * used to evaluate how well model generalize
 
-# 
+## 
 ![Bee Predictions](./bee-predictions.png)
 
 
