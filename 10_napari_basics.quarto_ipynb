@@ -1,0 +1,113 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Napari basics \n",
+        "\n",
+        "## Why use Napari for DL workflows ?\n",
+        "* ROIs\n",
+        "* Layers\n",
+        "* Labelling tools\n",
+        "\n",
+        "## Test image \n"
+      ],
+      "id": "944e4ebf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from skimage.io import imread\n",
+        "import os \n",
+        "import napari\n",
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "\n",
+        "data_path = r'./data'\n",
+        "parent_path = os.path.join(data_path, 'ladybugs_SAM')\n",
+        "img = imread(os.path.join(parent_path, '26638467_41374651.jpg'))\n",
+        "plt.imshow(img)"
+      ],
+      "id": "7ccd2bd6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Start Napari and add layers\n"
+      ],
+      "id": "6e984f19"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| eval: true \n",
+        "viewer = napari.Viewer()\n",
+        "\n",
+        "labels = np.zeros([img.shape[0], img.shape[1]], dtype=np.uint16)\n",
+        "\n",
+        "viewer.add_image(img, name='ladybug')\n",
+        "viewer.add_labels(labels, name='labels')\n",
+        "rois_layer = viewer.add_shapes(face_color='transparent', edge_width=15, edge_color='blue', name='rois')\n",
+        "\n",
+        "box = [[100,100], [100,800],[800,800], [800,100]]\n",
+        "rois_layer.add_rectangles(box)"
+      ],
+      "id": "c02d61e0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Add a cellpose layer\n"
+      ],
+      "id": "68d1c0a5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: true\n",
+        "#| eval: true \n",
+        "from cellpose import models, io\n",
+        "model_cyto3 = models.CellposeModel(gpu=True, model_type=\"cyto3\")\n",
+        "results = np.zeros([img.shape[0], img.shape[1]], dtype=np.uint16)\n",
+        "viewer.add_labels(results, name='cyto3 masks')\n",
+        "results = model_cyto3.eval(img, diameter=140)\n",
+        "viewer.layers['cyto3 masks'].data = results[0]"
+      ],
+      "id": "195a0121",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "screenshot = viewer.screenshot(r'./napari_screenshot.png', canvas_only=False)\n",
+        "plt.imshow(screenshot)"
+      ],
+      "id": "130521ee",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\bnort\\miniconda3\\envs\\pytorch_and_SAM3\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

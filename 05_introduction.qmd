@@ -1,4 +1,28 @@
+## Notebooks and Napari Widgets for Deep Learning
 
+![](url_qrcodecreator.com_18_38_23.png)
+
+
+## Notebooks and Napari Widgets for Deep Learning
+
+
+:::: {.columns}
+
+::: {.column width="65%"}
+**Brian Northan**
+
+>Contract R&D Engineer  
+>Imaging Processing  
+>True North Intelligent Algorithms  
+
+>Contributor: ImageJ-Ops, CLIJ, Image.sc
+:::
+
+::: {.column width="35%"}
+![](logo.jpeg){width="300" fig-alt="tnia logo" fig-align="right"}
+:::
+
+::::
 
 ## Outline
 
@@ -41,21 +65,20 @@
 
 [napari-segment-everything](https://github.com/True-North-Intelligent-Algorithms/napari-segment-everything) - This is a Napari GUI for segment-everything
 
-## Training, Validation and test sets
+## Under Construction
+
+![](under_construction.jpg)
+
+## Training, Validation and Test sets
 
 * Training - data that is input to the model
     * ideally get almost 'perfect' results when predicting on training set
-    * Or dl approach not appropriate for problem
 * Validation 
     * Data not fed to model
     * used to tune parameters during training.  
-    * Hints at how well model generalizes but can be deceptive. 
-
-## Training, Validation and test sets
 * Test 
     * unseen partition 
     * used to evaluate how well model generalize
-    * as soon as we see it becomes validation
 
 # 
 ![Bee Predictions](./bee-predictions.png)

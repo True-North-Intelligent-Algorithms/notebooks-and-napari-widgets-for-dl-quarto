@@ -1,8 +1,5 @@
-# Introduction
 
 {{< include 05_introduction.qmd >}}
-
-# Napari Basics
 
 {{< include 10_napari_basics.qmd >}}
 

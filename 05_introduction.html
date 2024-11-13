@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="15_dl_projects_files/libs/clipboard/clipboard.min.js"></script>
-<script src="15_dl_projects_files/libs/quarto-html/tabby.min.js"></script>
-<script src="15_dl_projects_files/libs/quarto-html/popper.min.js"></script>
-<script src="15_dl_projects_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="15_dl_projects_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="15_dl_projects_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="15_dl_projects_files/libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="05_introduction_files/libs/clipboard/clipboard.min.js"></script>
+<script src="05_introduction_files/libs/quarto-html/tabby.min.js"></script>
+<script src="05_introduction_files/libs/quarto-html/popper.min.js"></script>
+<script src="05_introduction_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="05_introduction_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="05_introduction_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="05_introduction_files/libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.6.32">
 
   <title>Notebooks and Widgets for Deep Learning</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="15_dl_projects_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="15_dl_projects_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="05_introduction_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="05_introduction_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -28,13 +28,13 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="15_dl_projects_files/libs/revealjs/dist/theme/quarto-2ff78e2e6999b6200d15f6cb181d00bd.css">
-  <link href="15_dl_projects_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="15_dl_projects_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="15_dl_projects_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="15_dl_projects_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="15_dl_projects_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="15_dl_projects_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="05_introduction_files/libs/revealjs/dist/theme/quarto-2ff78e2e6999b6200d15f6cb181d00bd.css">
+  <link href="05_introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="05_introduction_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="05_introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="05_introduction_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="05_introduction_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="05_introduction_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -332,56 +332,111 @@
 </div>
 
 </section>
-<section id="file-organization" class="slide level2">
-<h2>File Organization</h2>
-<p>Deep learning is</p>
-<ul>
-<li>60% file organization</li>
-<li>40% drawing</li>
-</ul>
+<section id="qrcode" class="slide level2">
+<h2>QRCode</h2>
+
+<img data-src="url_qrcodecreator.com_18_38_23.png" class="r-stretch"></section>
+<section id="notebooks-and-napari-widgets-for-deep-learning" class="slide level2">
+<h2>Notebooks and Napari Widgets for Deep Learning</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<p><strong>Brian Northan</strong></p>
+<blockquote>
+<p>Contract R&amp;D Engineer<br>
+Imaging Processing<br>
+True North Intelligent Algorithms</p>
+</blockquote>
+<blockquote>
+<p>Contributor: ImageJ-Ops, CLIJ, Image.sc</p>
+</blockquote>
+</div><div class="column" style="width:35%;">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="logo.jpeg" class="quarto-figure quarto-figure-right" alt="tnia logo" width="300"></p>
+</figure>
+</div>
+</div></div>
 </section>
-<section id="types-of-files" class="slide level2">
-<h2>Types of files</h2>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
 <ul>
-<li><strong>annotations</strong>: the annotated images<br>
-</li>
-<li><strong>labels</strong>: The annotations used for training<br>
-</li>
-<li><strong>patches</strong>: Patches are regions extracted from labels and augmented. You can have potentially thousands of patches.
+<li>Napari basics</li>
+<li>Train/Validate on one image
 <ul>
-<li>Often computed ‘lazily’ during training</li>
+<li>with Napari ROIs</li>
 </ul></li>
 </ul>
 </section>
-<section id="types-of-files-1" class="slide level2">
-<h2>Types of files</h2>
+<section id="outline-1" class="slide level2">
+<h2>Outline</h2>
 <ul>
-<li><strong>models</strong>: Files contianing model weights</li>
-<li><strong>predictions</strong>: Predictions generated from models<br>
-</li>
-<li><strong>yolo-labels/patches/predictions</strong>: These are bounding boxes useful for some DL approaches</li>
+<li>Sparse
+<ul>
+<li>Stardist with sparse labels</li>
+</ul></li>
+<li>Scale
+<ul>
+<li>Cellpose at different scales</li>
+<li>Stardist receptive field</li>
+<li>thin protrusions</li>
+<li>Lady bugs at different scales</li>
+</ul></li>
 </ul>
 </section>
-<section id="file-organization-1" class="slide level2">
-<h2>File Organization</h2>
-
-<img data-src="./file-organization.jpg" class="r-stretch"></section>
-<section id="explore-and-label-data" class="slide level2">
-<h2>Explore and label data</h2>
+<section id="outline-2" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Segment anything and everything (SAM)
+<ul>
+<li>visualizing overlapping SAM labels</li>
+<li>Segment everything and filter</li>
+</ul></li>
+</ul>
 </section>
-<section id="explore-and-label-data-1" class="slide level2">
-<h2>Explore and label data</h2>
-<div id="091658e0" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="15_dl_projects_files/figure-revealjs/cell-3-output-1.png" width="760" height="416"></p>
-</figure>
-</div>
-</div>
-</div>
-
+<section id="instance-segmentation" class="slide level2">
+<h2>Instance segmentation</h2>
 </section>
+<section id="links-to-projects-used-in-this-presentation" class="slide level2">
+<h2>Links to projects used in this presentation</h2>
+<p><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl-quarto">Link to slides</a></p>
+<p><a href="https://true-north-intelligent-algorithms.github.io/notebooks-and-napari-widgets-for-dl/intro.html">Course material</a> from virtual I2k2024</p>
+<p><a href="https://github.com/True-North-Intelligent-Algorithms/tnia-python">tnia-python</a> - My helper library</p>
+</section>
+<section id="links-to-projects-used-in-this-presentation-1" class="slide level2">
+<h2>Links to projects used in this presentation</h2>
+<p><a href="https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl">easy-augment-batch-dl</a> deep learning on image sets with UNETs, Cellpose, Stardist, SAM and friends.</p>
+<p><a href="https://github.com/True-North-Intelligent-Algorithms/segment-everything">segment-everything</a> - Utilities for rendering and training prompt-based and overlapping segmentation models (like SAM).</p>
+<p><a href="https://github.com/True-North-Intelligent-Algorithms/napari-segment-everything">napari-segment-everything</a> - This is a Napari GUI for segment-everything</p>
+</section>
+<section id="under-construction" class="slide level2">
+<h2>Under Construction</h2>
+
+<img data-src="under_construction.jpg" class="r-stretch"></section>
+<section id="training-validation-and-test-sets" class="slide level2">
+<h2>Training, Validation and Test sets</h2>
+<ul>
+<li>Training - data that is input to the model
+<ul>
+<li>ideally get almost ‘perfect’ results when predicting on training set</li>
+</ul></li>
+<li>Validation
+<ul>
+<li>Data not fed to model</li>
+<li>used to tune parameters during training.<br>
+</li>
+</ul></li>
+<li>Test
+<ul>
+<li>unseen partition</li>
+<li>used to evaluate how well model generalize</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+
+
+<img data-src="./bee-predictions.png" class="r-stretch quarto-figure-center"><p class="caption">Bee Predictions</p></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
@@ -390,20 +445,20 @@
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="15_dl_projects_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="05_introduction_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="15_dl_projects_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="15_dl_projects_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="15_dl_projects_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="05_introduction_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

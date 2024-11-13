@@ -11,7 +11,7 @@
         "\n",
         "## Create a 2D Object\n"
       ],
-      "id": "88e8863e"
+      "id": "e374dcd5"
     },
     {
       "cell_type": "code",
@@ -35,7 +35,7 @@
         "fig = imshow2d(ellipsoid2D, 8,8)\n",
         "temp = fig.suptitle('ellipsoid2D')"
       ],
-      "id": "cd1305ad",
+      "id": "6a182ac5",
       "execution_count": null,
       "outputs": []
     },
@@ -63,7 +63,7 @@
         "\n",
         "# {background-image=\"./stardist-receptive-field.png\"}"
       ],
-      "id": "de5dd150"
+      "id": "7ba5f69f"
     }
   ],
   "metadata": {
